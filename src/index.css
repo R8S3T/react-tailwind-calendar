@@ -1,0 +1,6 @@
+/* The index.css file is a global CSS file that applies to the entire application.
+It contains styles that are not specific to any particular component but rather affect the overall styling of the app, like body backgrounds.  */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
