@@ -1,92 +1,79 @@
-import React, { useState, useEffect} from 'react';
-
+import React, { useState } from 'react';
+import CalendarHeader from './CalendarHeader';
+import CalendarBody from './CalendarBody';
+import CalendarNavigation from './CalendarNavigation';
+import CreateCalendarRows from './CreateCalendarRows';
+import { handleInputChange, handleAddEvent } from './EventHandling';
+import EventModal from './EventModal';
 
 const Calendar = () => {
-    const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-
-    const months = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-    ];
-
-    const [currentDate, setCurrentDate] = useState(new Date());
-    const [monthYear, setMonthYear] = useState('');
-    const [calendarBody, setCalendarBody] = useState([]);
-
-    useEffect(() => {
-        generateCalendar();
-    }, [currentDate]);
-
-    const generateCalendar = () => {
-        const month = currentDate.getMonth();
-        const year = currentDate.getFullYear();
-        setMonthYear(`${months[month]} ${year}`);
-        const firstDay = new Date(year, month, 0).getDay();
-        const lastDay = new Date(year, month + 1, 0).getDate();
-
-        let date = 1;
-        let weeks = [];
-        for (let week = 0; week < 6; week++) {
-        let days = [];
-        for (let day = 0; day < 7; day++) {
-            if (week === 0 && day < firstDay) {
-            days.push('');
-            } else if (date > lastDay) {
-            days.push('');
-            } else {
-            days.push(date++);
-            }
-        }
-        weeks.push(days);
-        }
-        setCalendarBody(weeks);
-    };
-
-    const handlePrevMonth = () => {
-        setCurrentDate(prevDate => new Date(prevDate.getFullYear(), prevDate.getMonth() - 1));
-    };
+    const [events, setEvents] = useState([]);
+    const [newEvent, setNewEvent] = useState('');
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
+    const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+    const [modalVisible, setModalVisible] = useState(false);
 
     const handleNextMonth = () => {
-        setCurrentDate(prevDate => new Date(prevDate.getFullYear(), prevDate.getMonth() + 1));
+        setCurrentMonth((prevMonth) => prevMonth + 1);
+    }
+
+    const handlePreviousMonth = () => {
+        setCurrentMonth((prevMonth) => prevMonth - 1);
+    }
+
+    const handleDateClick = (date) => {
+        setSelectedDate(date);
+        setModalVisible(true);
     };
+
+    const handleCloseModal = () => {
+        setModalVisible(false);
+    };
+
+    const handleEventInputChange = (e) => {
+        handleInputChange(e, setNewEvent);
+    };
+
+    const handleEventAdd = () => {
+        handleAddEvent(newEvent, selectedDate, setEvents, setNewEvent, setSelectedDate);
+        setModalVisible(false);
+    }
+
+    const calendarRows = CreateCalendarRows(currentYear, currentMonth);
 
     return (
-        <div id="calendar" className="col-span-1 bg-my-blue p-4 flex-grow">
-        <div className="flex justify-between bg-grey-200">
-            <button id="prevBtn" onClick={handlePrevMonth}> &lt; Prev </button>
-            <h2 id="monthYear"> {monthYear} </h2>
-            <button id="nextBtn" onClick={handleNextMonth}> Next &gt; </button>
-        </div>
-        <table className="w-full h-full">
-            <thead>
-            <tr className="bg-my-green">
-                {daysOfWeek.map((day, i) => <th key={i} className="bg-my-grey p-4 text-center">{day}</th>)}
-            </tr>
-            </thead>
-            <tbody id="calendarBody">
-            {calendarBody.map((week, i) =>
-                <tr key={i}>
-                {week.map((day, j) => 
-                    <td key={j} className="text-center">
-                    {day}
-                    </td>
-                )}
-                </tr>
-            )}
-            </tbody>
-        </table>
+        <div id="calendar" className="col-span-1 bg-my-blue p-2 flex-grow h-full">
+            <CalendarNavigation
+                onNextMonth={handleNextMonth}
+                onPreviousMonth={handlePreviousMonth}
+                currentMonth={currentMonth}
+                currentYear={currentYear}
+            />
+            <table className='w-full h-full'>
+                <CalendarHeader />
+                <CalendarBody
+                    calendarRows={calendarRows}
+                    handleDateClick={handleDateClick}
+                />
+            </table>
+            <EventModal
+                show={modalVisible}
+                onClose={handleCloseModal}
+                onInputChange={handleEventInputChange}
+                onAddEvent={handleEventAdd}
+                newEvent={newEvent}
+            />
+            <div>
+                <h3>Events</h3>
+                {events.map((event, index) => (
+                <div key={index}>
+                    <p>{event.date.toDateString()}: {event.title}</p>
+                </div>
+                ))}
+            </div>
         </div>
     );
-    };
+}
 
-    export default Calendar;
+export default Calendar;

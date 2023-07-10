@@ -6,15 +6,28 @@
 // and rendering top-level components that are shared across all pages.
 
 
-import React from "react";
-import Calendar from "./Calendar.jsx";
-import DayContainer from "./DayContainer.jsx";
+import React, { useState } from "react";
+import Calendar from "./Calendar";
+import DayContainer from "./DayContainer";
+import RecipeContainer from "./RecipeContainer";
 
 const App = () => {
+
   return (
-    <div className="p-6 flex flex-col grid grid-cols-2 grid-rows-2 gap-2 bg-grey-100 h-screen">
-      <Calendar />
-      <DayContainer />
+    <div className="h-screen flex  bg-gray-300">
+      <div className="flex-grow">
+        <div className="h-full p-2">
+          <Calendar />
+        </div>
+      </div>
+        <div className="w-1/2 flex flex-col">
+          <div className="flex-grow h-2/3 p-2 flex flex-col">
+          <DayContainer />
+          </div>
+          <div className="flex-grow h-1/2 p-2 flex flex-col">
+            <RecipeContainer />
+          </div>
+        </div>
     </div>
   );
 };

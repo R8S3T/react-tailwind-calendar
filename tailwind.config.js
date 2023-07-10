@@ -9,7 +9,8 @@ export default {
       colors: {
         'my-blue': '#668ba4',
         'my-green': '#a7bcb9',
-        'my-grey': '#e0ebeb'
+        'my-grey': '#e0ebeb',
+        'my-light-blue': '#79c2d0'
       },
     },
   },
