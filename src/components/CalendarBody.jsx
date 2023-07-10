@@ -18,9 +18,9 @@ const CalendarBody = ({ calendarRows, handleDateClick }) => {
                         <td
                         key={cellIndex}
                         onClick={() => handleDateClick(date)}
-                        className={`${isCurrentMonth(date) ? 'text-black' : 'text-gray-500'}`}
+                        className={`text-sm p-4 ${isCurrentMonth(date) ? 'text-black' : 'text-gray-500'}`}
                     >
-                        <div className={`flex items-center justify-center h-full`}>
+                        <div className={`flex items-center justify-center`}>
                             {date.getDate()}
                             {isCurrentDay(date) && <div className="w-2 h-2 bg-red-500 rounded-full ml-1"></div>}
                         </div>

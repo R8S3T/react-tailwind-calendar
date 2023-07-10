@@ -5,7 +5,8 @@
 const DayContainer = ({ events, selectedDay }) => {
   return (
     <div className="bg-my-green p-4 flex-grow h-full">
-    <h2 className="text-xl font-bold">Day Container</h2>
+    <h2 className="text-xl font-bold">Rebecca's Day</h2>
+    <h3 className="text-sm">There's nothing to do today... Enjoy!</h3>
   </div>
   );
 };

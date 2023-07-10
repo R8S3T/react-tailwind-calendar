@@ -43,14 +43,14 @@ const Calendar = () => {
     const calendarRows = CreateCalendarRows(currentYear, currentMonth);
 
     return (
-        <div id="calendar" className="col-span-1 bg-my-blue p-2 flex-grow h-full">
+        <div id="calendar" className="col-span-1 bg-my-blue p-4 flex-grow h-full">
             <CalendarNavigation
                 onNextMonth={handleNextMonth}
                 onPreviousMonth={handlePreviousMonth}
                 currentMonth={currentMonth}
                 currentYear={currentYear}
             />
-            <table className='w-full h-full'>
+            <table className='w-full h-auto'>
                 <CalendarHeader />
                 <CalendarBody
                     calendarRows={calendarRows}

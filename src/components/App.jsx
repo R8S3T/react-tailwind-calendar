@@ -14,21 +14,17 @@ import RecipeContainer from "./RecipeContainer";
 const App = () => {
 
   return (
-    <div className="h-screen flex  bg-gray-300">
-      <div className="flex-grow">
-        <div className="h-full p-2">
+    <div className="grid grid-rows-4 grid-cols-4 gap-4 bg-gray-300 h-screen">
+      <div className="row-span-4 col-span-2">
           <Calendar />
-        </div>
       </div>
-        <div className="w-1/2 flex flex-col">
-          <div className="flex-grow h-2/3 p-2 flex flex-col">
+          <div className="row-span-2 col-span-2">
           <DayContainer />
           </div>
-          <div className="flex-grow h-1/2 p-2 flex flex-col">
+          <div className="row-span-2 col-span-2">
             <RecipeContainer />
           </div>
         </div>
-    </div>
   );
 };
 
