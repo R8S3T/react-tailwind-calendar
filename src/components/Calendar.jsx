@@ -6,13 +6,12 @@ import CreateCalendarRows from './CreateCalendarRows';
 import { handleInputChange, handleAddEvent } from './EventHandling';
 import EventModal from './EventModal';
 
-const Calendar = () => {
-    const [events, setEvents] = useState([]);
+const Calendar = ({events, setEvents, selectedDate, setSelectedDate}) => {
     const [newEvent, setNewEvent] = useState('');
-    const [selectedDate, setSelectedDate] = useState(null);
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
     const [modalVisible, setModalVisible] = useState(false);
+    const [eventType, setEventType] = useState('Work');
 
     const handleNextMonth = () => {
         setCurrentMonth((prevMonth) => prevMonth + 1);
@@ -36,7 +35,7 @@ const Calendar = () => {
     };
 
     const handleEventAdd = () => {
-        handleAddEvent(newEvent, selectedDate, setEvents, setNewEvent, setSelectedDate);
+        handleAddEvent(newEvent, selectedDate, eventType, setEvents, setNewEvent, setSelectedDate, setEventType);
         setModalVisible(false);
     }
 
@@ -55,6 +54,7 @@ const Calendar = () => {
                 <CalendarBody
                     calendarRows={calendarRows}
                     handleDateClick={handleDateClick}
+                    events={events}
                 />
             </table>
             <EventModal
@@ -63,15 +63,9 @@ const Calendar = () => {
                 onInputChange={handleEventInputChange}
                 onAddEvent={handleEventAdd}
                 newEvent={newEvent}
+                eventType={eventType}
+                setEventType={setEventType}
             />
-            <div>
-                <h3>Events</h3>
-                {events.map((event, index) => (
-                <div key={index}>
-                    <p>{event.date.toDateString()}: {event.title}</p>
-                </div>
-                ))}
-            </div>
         </div>
     );
 }
