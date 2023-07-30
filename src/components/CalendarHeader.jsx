@@ -1,19 +1,20 @@
 import React from "react";
 
 const CalendarHeader = () => {
-    return (
-        <thead>
-            <tr className="bg-my-green">
-                <th>Sun</th>
-                <th>Mon</th>
-                <th>Tue</th>
-                <th>Wed</th>
-                <th>Thu</th>
-                <th>Fri</th>
-                <th>Sat</th>
-            </tr>
-        </thead>
-    );
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    return days.map((day, index) => (
+        <div
+            key={index}
+            className="flex items-center justify-center p-2 bg-my-green rounded-md text-xl md:text-lg sm:text-lg text-center mt-6 mb-2"
+        >
+            {day}
+        </div>
+    ));
 }
 
 export default CalendarHeader;
+
+
+
+

@@ -5,6 +5,7 @@ export const handleInputChange = (e, setNewEvent) => {
 export const handleAddEvent = (newEvent, selectedDate, eventType, setEvents, setNewEvent, setSelectedDate, setEventType) => {
     if (newEvent.trim() !== '' && selectedDate) {
         const event = {
+            id: new Date().getTime(), // adding id as timestamp
             date: selectedDate.toDateString(),
             title: newEvent.trim(),
             type: eventType
@@ -19,3 +20,4 @@ export const handleAddEvent = (newEvent, selectedDate, eventType, setEvents, set
         setEventType('Work');
     }
 }
+
