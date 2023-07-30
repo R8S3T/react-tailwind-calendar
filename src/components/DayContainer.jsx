@@ -8,6 +8,7 @@ import { getEventColor } from './GetEventColor';
 import EditEventModal from './EditEventModal';
 import { Link } from 'react-router-dom';
 import { FaCog } from 'react-icons/fa';
+import UserAvatar from './UserAvatar';
 import useCalendarEvents from './CustomHooks/UseCalendarEvents';
 
 
@@ -31,23 +32,32 @@ const DayContainer = ({ events, selectedDay, modalVisible, setModalVisible, hand
     }, []);
 
     const [userName, setUserName] = useState(localStorage.getItem('userName') || 'Rebecca');
+    const [userEmail, setUserEmail] = useState(localStorage.getItem('userEmail') || 'default@email.com');
 
     useEffect(() => {
         const name = localStorage.getItem('userName');
+        const email = localStorage.getItem('userEmail');
         if (name) {
-            setUserName(name);
-        }
+        setUserName(name);
+    }
+    if (email) {
+        setUserEmail(email);
+    }
     }, []);
 
     return (
         <div className="h-full overflow-auto bg-my-green p-4 flex-grow flex flex-col justify-between">
-    <div className="my-4">
-        <div className="flex items-center justify-center">
-            <h2 className="md:text-lg font-bold text-3xl mb-6">{`${userName}'s Day on ${selectedDay ? selectedDay.toDateString() : "None"}`}</h2>
-        </div>
-        <Link to="/settings" className="absolute top-8 right-12 hover:text-blue-600">
-            <FaCog size={30} />
-        </Link>
+        <div className="my-4">
+            <div className="flex items-center justify-center">
+                <h2 className="md:text-xl text-3xl mb-6">
+                    {`${userName}'s Day `}
+                    <UserAvatar className="inline-block w-12 h-12 mx-2" email={userEmail} />
+                    {selectedDay ? selectedDay.toDateString() : "None"}
+                </h2>
+            </div>
+            <Link to="/settings" className="absolute top-8 right-12 hover:text-blue-600">
+                <FaCog size={30} />
+            </Link>
         <div className="flex flex-wrap justify-between">
             {eventsForSelectedDay.length > 0 ? (
                 eventsForSelectedDay.map((event, index) => {
@@ -60,7 +70,10 @@ const DayContainer = ({ events, selectedDay, modalVisible, setModalVisible, hand
                     );
                 })
             ) : (
-                <h3 className="text-sm">There's nothing to do today... Enjoy!</h3>
+                <div className="w-full h-full flex items-center justify-center">
+                <h3 
+                className="text-md">There's nothing to do today... Enjoy your freetime!</h3>
+            </div>
             )}
         </div>
     </div>
