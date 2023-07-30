@@ -17,32 +17,30 @@ const RecipeContainer = () => {
     }, []);
 
     return (
-        <div>
-        <div className="flex">
+        <div className="h-full md:max-h-[500px] overflow-auto bg-my-grey-2 flex flex-col md:flex-row p-4">
             {recipe && (
-            <img
-                src={recipe.strMealThumb}
-                className="max-w-full h-auto"
-                style={{ width: '250px', height: '250px' }}
-                alt={recipe.strMeal}
-            />
+                <img
+                    src={recipe.strMealThumb}
+                    className="w-full md:w-1/2 object-cover h-full md:h-auto"
+                    alt={recipe.strMeal}
+                />
             )}
-            <div className="ml-4">
-            {instructions && (
-                <>
-                <h2 className="text-xl font-bold">Cooking Instructions:</h2>
-                <p className="line-clamp-6">{instructions}</p>
-                {recipe.strSource && (
-                    <a href={recipe.strSource} target='_blank' rel='noopener noreferrerer' className='mt-2'>
-                        <h3 className="mt-2">Click here for full instructions...</h3>
-                    </a>
+            <div className="ml-4 mt-4 md:mt-0 md:ml-4 w-full md:w-1/2">
+                {instructions && (
+                    <>
+                        <h2 className="md:text-lg font-bold">{recipe.strMeal}</h2>
+                        <p className="md:text-sm line-clamp-2">{instructions}</p>
+                        {recipe.strSource && (
+                            <a href={recipe.strSource} target='_blank' rel='noopener noreferrerer' className='mt-2'>
+                                <h3 className="mt-2">Full instructions...</h3>
+                            </a>
+                        )}
+                    </>
                 )}
-                </>
-            )}
             </div>
         </div>
-        </div>
     );
+    
 };
 
 export default RecipeContainer;
