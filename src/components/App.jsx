@@ -6,6 +6,7 @@
 // and rendering top-level components that are shared across all pages.
 
 import React, { useState, useEffect } from "react";
+import '../App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Calendar from "./Calendar";
 import DayContainer from "./DayContainer";
@@ -27,15 +28,15 @@ const MainPage = ({ events, handleEventAdd, handleEventDelete, handleEventEdit})
     };
 
     return (
-        <div className="grid grid-rows-3 grid-cols-4 gap-4 bg-gray-300 h-screen p-4">
-            <div className="row-span-3 col-span-2">
+        <div className="grid grid-cols-1 gap-4 bg-gray-300 h-screen p-4 sm:grid-cols-2 md:grid-cols-4 md:grid-rows-3">
+            <div className="col-span-1 sm:col-span-2 md:col-span-2 md:row-span-3">
                 <Calendar
                     events={events}
                     selectedDate={selectedDate}
                     setSelectedDate={setSelectedDate}
                 />
             </div>
-            <div className="row-span-1 col-span-2">
+            <div className="col-span-1 sm:col-span-2 md:col-span-2 md:row-span-1">
                 <DayContainer
                     events={events}
                     selectedDay={selectedDate}
@@ -51,10 +52,10 @@ const MainPage = ({ events, handleEventAdd, handleEventDelete, handleEventEdit})
                     handleEventEdit={handleEventEdit}
                 />
             </div>
-            <div className="row-span-1 col-span-2">
+            <div className="col-span-1 sm:col-span-2 md:col-span-2 md:row-span-1">
                 <TodoListContainer />
             </div>
-            <div className="row-span-1 col-span-2">
+            <div className="col-span-1 sm:col-span-2 md:col-span-2 md:row-span-1">
                 <RecipeContainer />
             </div>
         </div>
@@ -82,58 +83,4 @@ const App = () => {
 export default App;
 
 
-/* 
-const App = () => {
-    const { events, handleEventAdd, handleEventDelete, handleEventEdit } = useCalendarEvents(JSON.parse(localStorage.getItem('events')) || []);
-
-    const [selectedDate, setSelectedDate] = useState(null);
-    const [newEvent, setNewEvent] = useState('');
-    const [modalVisible, setModalVisible] = useState(false);
-    const [eventType, setEventType] = useState('Work');
-
-    const handleEventInputChange = (e) => {
-        handleInputChange(e, setNewEvent);
-    };
-
-    // Use an effect to update localStorage whenever the events state changes
-    useEffect(() => {
-        localStorage.setItem('events', JSON.stringify(events));
-    }, [events]);
-
-    return (
-        <div className="grid grid-rows-3 grid-cols-4 gap-4 bg-gray-300 h-screen p-4">
-            <div className="row-span-3 col-span-2">
-                <Calendar
-                    events={events}
-                    selectedDate={selectedDate}
-                    setSelectedDate={setSelectedDate}
-                />
-            </div>
-            <div className="row-span-1 col-span-2">
-                <DayContainer
-                    events={events}
-                    selectedDay={selectedDate}
-                    modalVisible={modalVisible}
-                    setModalVisible={setModalVisible}
-                    handleEventInputChange={handleEventInputChange}
-                    handleEventAdd={handleEventAdd}
-                    newEvent={newEvent}
-                    eventType={eventType}
-                    setEventType={setEventType}
-                    handleEventDelete={handleEventDelete} // Passed down to DayContainer
-                    handleEventEdit={handleEventEdit} // Passed down to DayContainer
-                />
-            </div>
-            <div className="row-span-1 col-span-2">
-                <TodoListContainer />
-            </div>
-            <div className="row-span-1 col-span-2">
-                <RecipeContainer />
-            </div>
-        </div>
-    );
-};
-
-export default App;
- */
 

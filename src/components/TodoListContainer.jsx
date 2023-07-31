@@ -29,22 +29,22 @@ const TodoListContainer = () => {
         <div className="h-full overflow-auto p-4 bg-my-green-2">
             <h2 className="md:text-xl mb-4">Todo List</h2>
             <form onSubmit={addTodo} className="mb-4 flex">
-                <input 
-                    type="text" 
-                    value={newTodo} 
-                    onChange={e => setNewTodo(e.target.value)} 
-                    placeholder="New Todo" 
+                <input
+                    type="text"
+                    value={newTodo}
+                    onChange={e => setNewTodo(e.target.value)}
+                    placeholder="New Todo"
                     className="flex-grow border p-2 mr-2 rounded"
                 />
-                <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Add</button>
+                <button type="submit" className="bg-button-color text-white hover:bg-button-color-hover px-4 py-2 rounded">Add</button>
             </form>
             <ul className="mt-4 space-y-2">
                 {todos.map((todo) => (
                     <li key={todo.id} className="flex items-center justify-between border p-2 my-2 rounded shadow">
                         <div className="flex items-center">
-                            <input 
-                                type="checkbox" 
-                                checked={todo.completed} 
+                            <input
+                                type="checkbox"
+                                checked={todo.completed}
                                 onChange={() => toggleTodo(todo.id)}
                                 className="mr-2"
                             />

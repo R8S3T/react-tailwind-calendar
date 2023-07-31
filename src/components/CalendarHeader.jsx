@@ -6,7 +6,7 @@ const CalendarHeader = () => {
     return days.map((day, index) => (
         <div
             key={index}
-            className="flex items-center justify-center p-2 bg-my-green rounded-md text-xl md:text-lg sm:text-lg text-center mt-6 mb-2"
+            className="flex items-center justify-center p-2 bg-my-green rounded-md text-sm md:text-base lg:text-xl text-center mt-6 mb-2"
         >
             {day}
         </div>

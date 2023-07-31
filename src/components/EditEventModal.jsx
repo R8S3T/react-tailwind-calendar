@@ -40,7 +40,7 @@ const EditEventModal = ({ show, onClose, selectedDate, events, onEventDelete, se
                         <div className="flex flex-col sm:flex-row justify-between mt-4">
                         <button
                             onClick={() => onEventDelete()}
-                            className="mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-400 text-base font-medium text-white hover:bg-red-700 focus:outline-none sm:mt-0 sm:ml-2 sm:w-auto sm:text-sm"
+                            className="mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-button-color text-base font-medium text-white hover:bg-button-color-hover focus:outline-none sm:mt-0 sm:ml-2 sm:w-auto sm:text-sm"
                         >
                             Delete
                         </button>

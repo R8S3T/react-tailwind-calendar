@@ -12,7 +12,9 @@ export default {
         'my-grey': '#e0ebeb',
         'my-grey-2': '#85a6b1',
         'my-light-blue': '#79c2d0',
-        'my-green-2': '#71a0a5'
+        'my-green-2': '#71a0a5',
+        'button-color': '#455d7a',
+        'button-color-hover': '#5585b5'
       },
     },
   },
