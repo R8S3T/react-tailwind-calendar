@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SettingsPage = () => {
     const [name, setName] = useState(localStorage.getItem('userName') || '');
     const [email, setEmail] = useState(localStorage.getItem('userEmail') || '');
+    const navigate = useNavigate();
     const [emailError, setEmailError] = useState(null);
     const [preference, setPreference] = useState({
         category: '',
@@ -35,6 +37,9 @@ const SettingsPage = () => {
         localStorage.setItem('userName', name);
         localStorage.setItem('userEmail', email);
         localStorage.setItem('preference', JSON.stringify(preference));
+
+        // Redirect to main page
+        navigate('/');
     }
 
     useEffect(() => {
@@ -87,7 +92,7 @@ const SettingsPage = () => {
                     </select>
                 </div>
                 <div className="flex items-center justify-end">
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={saveSettings}>
+                    <button className="bg-button-color hover:bg-button-color-hover text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={saveSettings}>
                         Save Settings
                     </button>
                 </div>

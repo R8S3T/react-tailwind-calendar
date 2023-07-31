@@ -1,1 +1,23 @@
 /* The App.css file is specific to the App component in a React app. It contains the styling rules that are applied specifically to the elements and components within the App component. This file is often used to define the styles that are unique to the main component of your application. */
+
+
+/* CalendarBody.jsx */
+/* responsive display of Event colors */
+
+
+.event-text {
+    width: 170px; /* Adjust this based on the width you want */
+    text-align: left;
+}
+
+
+.event-color-line {
+    @apply h-3.5; /* default height for larger screens */
+}
+
+@media (max-width: 1024px) {
+    .event-color-line {
+        height: 0.2rem !important;
+    }
+}
+
